@@ -1,5 +1,6 @@
 package com.example.springrestvotingsystem.dto.response;
 
+import com.example.springrestvotingsystem.enums.Error;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
