@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CandidateService {
@@ -24,6 +25,7 @@ public class CandidateService {
     }
 
     public List<Candidate> getCandidates() {
+        //TODO
         return candidateRepository.findAll();
     }
 
@@ -43,5 +45,13 @@ public class CandidateService {
 
         fileService.uploadBlobImage(img);
         return candidateRepository.save(candidate);
+    }
+
+    public Optional<Candidate> findWhoWonElection(){
+        return candidateRepository.findTopByOrderByVotesDesc();
+    }
+
+    public List<Candidate> showWhoIsWinningNow(){
+        return candidateRepository.findAllByOrderByVotesDesc();
     }
 }

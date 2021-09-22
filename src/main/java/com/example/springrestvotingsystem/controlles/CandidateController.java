@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -29,7 +30,7 @@ public class CandidateController {
     }
 
     @GetMapping
-    public List<CandidateDTO> getCandidates() {
+    public List<CandidateDTO> getCandidates(@RequestParam(required = false) Boolean desc) {
         return candidateService.getCandidates().stream().map(CandidateDTO::new).collect(toList());
     }
 
@@ -57,5 +58,15 @@ public class CandidateController {
                                                    @RequestParam("img") MultipartFile file) {
         return new CreateCandidateResponse(candidateService.createCandidate(new Candidate(createCandidateRequest),file));
     }
+
+    @GetMapping("/winner")
+    public Optional<Candidate> getWinnerOfElection() {
+        return candidateService.findWhoWonElection();
+    }
+
+//    @GetMapping("/")
+//    public List<Candidate> getListOfCandidatesByVoteCount() {
+//        return candidateService.showWhoIsWinningNow();
+//    }
 
 }
