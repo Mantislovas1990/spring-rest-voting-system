@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS voter_role;
 DROP TABLE IF EXISTS votes;
+DROP TABLE IF EXISTS files;
 DROP TABLE IF EXISTS candidates;
 DROP TABLE IF EXISTS voters;
 DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS files;
 DROP TABLE IF EXISTS elections;
 
 CREATE TABLE voters
@@ -33,8 +33,11 @@ CREATE TABLE candidates
 -- select count(*) from votes group by candidate_id
 CREATE TABLE elections
 (
-    id    BIGSERIAL PRIMARY KEY NOT NULL,
-    title varchar(100)          not null
+    id         BIGSERIAL PRIMARY KEY NOT NULL,
+    title      varchar(100)          not null,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+
 
 );
 
@@ -60,6 +63,11 @@ CREATE TABLE voter_role
     role_id  BIGINT REFERENCES roles (id)
 );
 
+INSERT INTO roles (name)
+VALUES ('VOTER'),
+       ('ADMIN');
+
+
 CREATE TABLE files
 (
     id           BIGSERIAL PRIMARY KEY NOT NULL,
@@ -71,7 +79,3 @@ CREATE TABLE files
     updated      TIMESTAMP             NOT NULL DEFAULT NOW()
 
 );
-
-INSERT INTO roles (name)
-VALUES ('VOTER'),
-       ('ADMIN');
