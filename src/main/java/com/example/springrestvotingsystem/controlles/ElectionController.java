@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +58,7 @@ public class ElectionController {
     })
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
     public CreateElectionResponse createElection(@Valid @RequestBody CreateElectionRequest createElectionRequest) {
         return new CreateElectionResponse(electionService.createElection(new Election(createElectionRequest)));
     }
@@ -69,6 +71,7 @@ public class ElectionController {
     })
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteElection(@PathVariable("id") Long id) {
         electionService.deleteElection(id);
     }

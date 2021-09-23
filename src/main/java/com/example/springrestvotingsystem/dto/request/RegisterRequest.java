@@ -31,7 +31,7 @@ public class RegisterRequest {
     private String lastName;
 
     @NotNull
-    @Range(min = 1, max = 140)
+    @Range(min = 1, max = 120)
     @ApiModelProperty(notes = "age of voter", required = true, name = "age", value = "22", example = "22")
     private Integer age;
 

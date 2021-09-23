@@ -23,15 +23,15 @@ public class CreateElectionResponse {
     private List<Vote> votes;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     public CreateElectionResponse(Election election) {
         this.id = election.getId();
         this.title = election.getTitle();
-        this.created_at = election.getCreated_at();
-        this.updated_at = election.getUpdated_at();
+        this.createdAt = election.getCreatedAt();
+        this.updatedAt = election.getUpdatedAt();
     }
 }

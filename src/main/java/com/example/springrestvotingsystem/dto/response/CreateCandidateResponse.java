@@ -18,16 +18,16 @@ public class CreateCandidateResponse {
     private String lastName;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     public CreateCandidateResponse(Candidate candidate) {
         this.id = candidate.getId();
         this.firstName = candidate.getFirstName();
         this.lastName = candidate.getLastName();
-        this.created_at = candidate.getCreated_at();
-        this.updated_at = candidate.getUpdated_at();
+        this.createdAt = candidate.getCreatedAt();
+        this.updatedAt = candidate.getUpdatedAt();
     }
 }

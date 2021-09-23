@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.RoleNotFoundException;
 import javax.validation.Valid;
 
 @RestController
@@ -53,7 +54,7 @@ public class MainController {
     })
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public VoterDTO register(@Valid @RequestBody RegisterRequest registerRequest) {
+    public VoterDTO register(@Valid @RequestBody RegisterRequest registerRequest) throws RoleNotFoundException {
         return new VoterDTO(voterService.createVoter(
                 new Voter(registerRequest)));
     }

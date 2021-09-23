@@ -1,10 +1,12 @@
 package com.example.springrestvotingsystem.dto;
 
 import com.example.springrestvotingsystem.entities.Role;
+import com.example.springrestvotingsystem.entities.Vote;
 import com.example.springrestvotingsystem.entities.Voter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,13 +21,19 @@ public class VoterDTO {
 
     private String lastName;
 
+    private String email;
+
+    private String gender;
+
     private Integer age;
 
     private Set<Role> roles;
 
-    private String created;
+    private String createdAt;
 
-    private String updated;
+    private String updatedAt;
+
+    private List<Vote> votes;
 
     public VoterDTO(Voter voter) {
         this.id = voter.getId();
@@ -34,7 +42,10 @@ public class VoterDTO {
         this.lastName = voter.getLastName();
         this.age = voter.getAge();
         this.roles = voter.getRoles();
-        this.created = voter.getCreatedAt().toString();
-        this.updated = voter.getUpdatedAt().toString();
+        this.votes=voter.getVotes();
+        this.gender=voter.getGender();
+        this.email=voter.getEmail();
+        this.createdAt = voter.getCreatedAt().toString();
+        this.updatedAt = voter.getUpdatedAt().toString();
     }
 }

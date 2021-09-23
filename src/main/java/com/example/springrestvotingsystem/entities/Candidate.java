@@ -36,18 +36,17 @@ public class Candidate {
     @CreationTimestamp
     @Column(name = "created_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     public Candidate(String firstName, String lastName, List<Vote> votes) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.votes = votes;
-
     }
 
     public Candidate(CreateCandidateRequest createCandidateRequest) {

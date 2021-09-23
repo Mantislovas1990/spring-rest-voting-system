@@ -36,7 +36,7 @@ public class CandidateService {
     public Candidate updateCandidate(Candidate updatedCandidate) {
 
         Candidate candidate = getCandidate(updatedCandidate.getId());
-        updatedCandidate.setCreated_at(candidate.getCreated_at());
+        updatedCandidate.setCreatedAt(candidate.getCreatedAt());
 
         return candidateRepository.save(updatedCandidate);
     }

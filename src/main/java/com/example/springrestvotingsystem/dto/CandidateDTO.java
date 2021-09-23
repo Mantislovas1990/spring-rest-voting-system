@@ -20,10 +20,17 @@ public class CandidateDTO {
 
     private List<Vote> votes;
 
+    private String createdAt;
+
+    private String updatedAt;
+
     public CandidateDTO(Candidate candidate) {
         this.id = candidate.getId();
         this.firstName = candidate.getFirstName();
         this.lastName = candidate.getLastName();
         this.votes = candidate.getVotes();
+        this.createdAt=candidate.getCreatedAt().toString();
+        this.updatedAt=candidate.getUpdatedAt().toString();
+
     }
 }

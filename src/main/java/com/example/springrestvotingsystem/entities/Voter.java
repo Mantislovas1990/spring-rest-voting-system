@@ -89,11 +89,12 @@ public class Voter implements UserDetails {
         this.firstName = voterDTO.getFirstName();
         this.lastName = voterDTO.getLastName();
         this.age = voterDTO.getAge();
+        this.email = voterDTO.getEmail();
+        this.gender = voterDTO.getGender();
         this.roles = voterDTO.getRoles();
-        this.createdAt = LocalDateTime.parse(voterDTO.getCreated());
-        this.updatedAt = LocalDateTime.parse(voterDTO.getUpdated());
+        this.createdAt = LocalDateTime.parse(voterDTO.getCreatedAt());
+        this.updatedAt = LocalDateTime.parse(voterDTO.getUpdatedAt());
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

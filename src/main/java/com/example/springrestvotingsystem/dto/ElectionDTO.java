@@ -17,9 +17,15 @@ public class ElectionDTO {
 
     private List<Vote> votes;
 
+    private String createdAt;
+
+    private String updatedAt;
+
     public ElectionDTO(Election election) {
         this.id = election.getId();
         this.title = election.getTitle();
         this.votes = election.getVotes();
+        this.createdAt=election.getCreatedAt().toString();
+        this.updatedAt=election.getUpdatedAt().toString();
     }
 }

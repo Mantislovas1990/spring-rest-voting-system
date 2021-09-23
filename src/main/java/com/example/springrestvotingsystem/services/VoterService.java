@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.List;
 import java.util.Set;
 
@@ -37,13 +38,12 @@ public class VoterService implements UserDetailsService {
         return voterRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Voter createVoter(Voter voter) {
+    public Voter createVoter(Voter voter) throws RoleNotFoundException {
         if (voterRepository.findVoterByUsername(voter.getUsername()).isPresent()) {
             throw new VoterAlreadyExistsException(voter.getUsername());
-        } else {
-            voter.setRoles(Set.of(roleRepository.findRoleByName("USER").get()));
         }
 
+        voter.setRoles(Set.of(roleRepository.findRoleByName("VOTER").orElseThrow(() -> new RoleNotFoundException("VOTER"))));
         voter.setPassword(passwordEncoder.encode(voter.getPassword()));
 
         return voterRepository.save(voter);
