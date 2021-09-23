@@ -49,7 +49,6 @@ public class VoterController {
         return new VoterDTO(voterService.getVoter(id));
     }
 
-
     @ApiOperation(value = "Delete voter by id", tags = "deleteVoter", httpMethod = "DELETE")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully delete voter by id"),
