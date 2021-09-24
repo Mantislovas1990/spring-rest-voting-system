@@ -6,7 +6,6 @@ import com.example.springrestvotingsystem.dto.request.UpdateCandidateRequest;
 import com.example.springrestvotingsystem.dto.response.CreateCandidateResponse;
 import com.example.springrestvotingsystem.dto.response.UpdateCandidateResponse;
 import com.example.springrestvotingsystem.entities.Candidate;
-import com.example.springrestvotingsystem.entities.File;
 import com.example.springrestvotingsystem.services.CandidateService;
 import com.example.springrestvotingsystem.services.FileService;
 import io.swagger.annotations.Api;

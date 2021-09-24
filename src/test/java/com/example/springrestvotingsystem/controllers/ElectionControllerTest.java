@@ -1,10 +1,7 @@
 package com.example.springrestvotingsystem.controllers;
 
 import com.example.springrestvotingsystem.dto.ElectionDTO;
-import com.example.springrestvotingsystem.dto.VoterDTO;
 import com.example.springrestvotingsystem.dto.request.CreateElectionRequest;
-import com.example.springrestvotingsystem.dto.request.RegisterRequest;
-import com.example.springrestvotingsystem.dto.response.CreateElectionResponse;
 import com.example.springrestvotingsystem.repositories.ElectionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

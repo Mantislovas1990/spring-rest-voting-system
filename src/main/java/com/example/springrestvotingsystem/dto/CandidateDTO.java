@@ -7,7 +7,6 @@ import com.example.springrestvotingsystem.entities.Vote;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.util.List;
 
 @Data

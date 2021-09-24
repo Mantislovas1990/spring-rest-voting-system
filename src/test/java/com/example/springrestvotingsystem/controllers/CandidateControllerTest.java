@@ -1,12 +1,8 @@
 package com.example.springrestvotingsystem.controllers;
 
 import com.example.springrestvotingsystem.dto.CandidateDTO;
-import com.example.springrestvotingsystem.dto.ElectionDTO;
 import com.example.springrestvotingsystem.dto.request.CreateCandidateRequest;
-import com.example.springrestvotingsystem.dto.request.CreateElectionRequest;
 import com.example.springrestvotingsystem.repositories.CandidateRepository;
-import com.example.springrestvotingsystem.repositories.ElectionRepository;
-import com.example.springrestvotingsystem.services.CandidateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,6 +6,7 @@ import com.example.springrestvotingsystem.dto.response.LoginResponse;
 import com.example.springrestvotingsystem.entities.Voter;
 import com.example.springrestvotingsystem.services.JwtService;
 import com.example.springrestvotingsystem.services.VoterService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -18,6 +19,7 @@ import javax.management.relation.RoleNotFoundException;
 import javax.validation.Valid;
 
 @RestController
+@Api(tags = "MainController")
 public class MainController {
 
     private final JwtService jwtService;

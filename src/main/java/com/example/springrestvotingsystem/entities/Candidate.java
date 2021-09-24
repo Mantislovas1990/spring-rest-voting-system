@@ -4,7 +4,6 @@ import com.example.springrestvotingsystem.dto.CandidateDTO;
 import com.example.springrestvotingsystem.dto.request.CreateCandidateRequest;
 import com.example.springrestvotingsystem.dto.request.UpdateCandidateRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,7 +34,6 @@ public class Candidate {
     @OneToMany(mappedBy = "candidate")
     private List<Vote> votes;
 
-
     @OneToOne(mappedBy = "candidate")
     private File image;
 
@@ -53,13 +51,11 @@ public class Candidate {
         this.firstName = firstName;
         this.lastName = lastName;
         this.votes = votes;
-//        this.image=image;
     }
 
     public Candidate(CreateCandidateRequest createCandidateRequest) {
         this.firstName = createCandidateRequest.getFirstName();
         this.lastName = createCandidateRequest.getLastName();
-//        this.image=createCandidateRequest.getImage();
     }
 
     public Candidate(Long id,UpdateCandidateRequest updateCandidateRequest){

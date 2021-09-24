@@ -1,7 +1,6 @@
 package com.example.springrestvotingsystem.dto.response;
 
 import com.example.springrestvotingsystem.entities.Candidate;
-import com.example.springrestvotingsystem.entities.File;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;

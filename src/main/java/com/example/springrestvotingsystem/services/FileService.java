@@ -1,6 +1,5 @@
 package com.example.springrestvotingsystem.services;
 
-import com.example.springrestvotingsystem.dto.CandidateDTO;
 import com.example.springrestvotingsystem.entities.Candidate;
 import com.example.springrestvotingsystem.entities.File;
 import com.example.springrestvotingsystem.exceptions.FileException;
