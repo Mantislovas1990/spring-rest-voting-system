@@ -1,8 +1,12 @@
 package com.example.springrestvotingsystem.controllers;
 
-import com.example.springrestvotingsystem.dto.VoterDTO;
-import com.example.springrestvotingsystem.dto.request.RegisterRequest;
-import com.example.springrestvotingsystem.repositories.VoterRepository;
+import com.example.springrestvotingsystem.dto.CandidateDTO;
+import com.example.springrestvotingsystem.dto.ElectionDTO;
+import com.example.springrestvotingsystem.dto.request.CreateCandidateRequest;
+import com.example.springrestvotingsystem.dto.request.CreateElectionRequest;
+import com.example.springrestvotingsystem.repositories.CandidateRepository;
+import com.example.springrestvotingsystem.repositories.ElectionRepository;
+import com.example.springrestvotingsystem.services.CandidateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureMockMvc
 @WithUserDetails("admin")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class VoterControllerTest {
+public class CandidateControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,23 +33,21 @@ public class VoterControllerTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private VoterRepository voterRepository;
+    private CandidateRepository candidateRepository;
 
     @Test
-    public void createVoterTest() throws Exception {
+    public void createElectionTest() throws Exception {
 
-        RegisterRequest registerRequest = new RegisterRequest("user1", "password", "name", "lastname", 22, "email1", "female");
+        CreateCandidateRequest createCandidateRequest = new CreateCandidateRequest("Testas1","testas1");
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/register")
-                .content(objectMapper.writeValueAsString(registerRequest))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/candidates/create")
+                .content(objectMapper.writeValueAsString(createCandidateRequest))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andReturn();
 
-        VoterDTO voterDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), VoterDTO.class);
+        CandidateDTO candidateDTO = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), CandidateDTO.class);
 
-        assertEquals(registerRequest.getUsername(),voterDTO.getUsername());
+        assertEquals(createCandidateRequest.getFirstName(),candidateDTO.getFirstName());
     }
-
-
 }

@@ -6,6 +6,7 @@ import com.example.springrestvotingsystem.dto.request.UpdateCandidateRequest;
 import com.example.springrestvotingsystem.dto.response.CreateCandidateResponse;
 import com.example.springrestvotingsystem.dto.response.UpdateCandidateResponse;
 import com.example.springrestvotingsystem.entities.Candidate;
+import com.example.springrestvotingsystem.entities.File;
 import com.example.springrestvotingsystem.services.CandidateService;
 import com.example.springrestvotingsystem.services.FileService;
 import io.swagger.annotations.Api;
@@ -119,8 +120,9 @@ public class CandidateController {
             @ApiResponse(code = 400, message = "Validation failed"),
             @ApiResponse(code = 401, message = "Unauthorized")
     })
-    public void uploadCandidateImage(@RequestParam("image") MultipartFile image, @PathVariable Long id) {
-        fileService.uploadBlobImage(image);
+    public void uploadCandidateImage(@RequestParam("image") MultipartFile image,
+                                     @PathVariable("id") Candidate candidate) {
+        fileService.uploadBlobImage(image,candidate);
     }
 
 

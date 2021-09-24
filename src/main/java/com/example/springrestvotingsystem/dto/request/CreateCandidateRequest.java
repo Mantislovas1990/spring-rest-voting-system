@@ -1,5 +1,6 @@
 package com.example.springrestvotingsystem.dto.request;
 
+import com.example.springrestvotingsystem.entities.File;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class CreateCandidateRequest {
     @ApiModelProperty(notes = "Candidate last name", required = true, name = "lastName", value = "Barnauskas", example = "Barnauskas")
     private String lastName;
 
-
+//    @ApiModelProperty(notes = "Candidates image", name = "image", value = "CandidateImage", example = "CandidateImage")
+//    private File image;
 
 }

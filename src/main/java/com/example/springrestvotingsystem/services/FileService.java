@@ -1,5 +1,7 @@
 package com.example.springrestvotingsystem.services;
 
+import com.example.springrestvotingsystem.dto.CandidateDTO;
+import com.example.springrestvotingsystem.entities.Candidate;
 import com.example.springrestvotingsystem.entities.File;
 import com.example.springrestvotingsystem.exceptions.FileException;
 import com.example.springrestvotingsystem.exceptions.FileNotFoundException;
@@ -25,7 +27,7 @@ public class FileService {
     }
 
 
-    public void uploadBlobImage(MultipartFile image) {
+    public void uploadBlobImage(MultipartFile image, Candidate candidate) {
         validateImage(image);
 
         String filename = String.format("%s_%d.%s", image.getOriginalFilename().split("\\.")[0],
@@ -41,6 +43,8 @@ public class FileService {
             throw new FileException("Cannot create file");
         }
 
+
+        file.setCandidate(candidate);
         fileRepository.save(file);
     }
 

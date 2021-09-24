@@ -1,6 +1,7 @@
 package com.example.springrestvotingsystem.dto.response;
 
 import com.example.springrestvotingsystem.entities.Candidate;
+import com.example.springrestvotingsystem.entities.File;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,6 @@ public class CreateCandidateResponse {
     private String firstName;
 
     private String lastName;
-
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;

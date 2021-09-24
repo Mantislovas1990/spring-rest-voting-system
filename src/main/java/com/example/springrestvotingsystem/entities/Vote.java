@@ -42,4 +42,11 @@ public class Vote {
     @Column(name = "updated_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
+
+    public Vote(Candidate candidate, Voter voter, Election election) {
+        this.candidate = candidate;
+        this.election = election;
+        this.voter = voter;
+    }
 }
+
