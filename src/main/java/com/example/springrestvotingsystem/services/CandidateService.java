@@ -4,7 +4,6 @@ import com.example.springrestvotingsystem.entities.Candidate;
 import com.example.springrestvotingsystem.exceptions.ResourceNotFoundException;
 import com.example.springrestvotingsystem.repositories.CandidateRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +24,6 @@ public class CandidateService {
     }
 
     public List<Candidate> getCandidates() {
-        //TODO
         return candidateRepository.findAll();
     }
 
@@ -41,9 +39,8 @@ public class CandidateService {
         return candidateRepository.save(updatedCandidate);
     }
 
-    public Candidate createCandidate(Candidate candidate, MultipartFile img) {
+    public Candidate createCandidate(Candidate candidate) {
 
-        fileService.uploadBlobImage(img);
         return candidateRepository.save(candidate);
     }
 

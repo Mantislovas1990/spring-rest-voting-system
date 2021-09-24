@@ -56,7 +56,7 @@ public class ElectionController {
             @ApiResponse(code = 400, message = "Validation failed"),
             @ApiResponse(code = 401, message = "Unauthorized")
     })
-    @PostMapping
+    @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public CreateElectionResponse createElection(@Valid @RequestBody CreateElectionRequest createElectionRequest) {

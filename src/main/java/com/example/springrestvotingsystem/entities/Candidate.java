@@ -1,5 +1,6 @@
 package com.example.springrestvotingsystem.entities;
 
+import com.example.springrestvotingsystem.dto.CandidateDTO;
 import com.example.springrestvotingsystem.dto.request.CreateCandidateRequest;
 import com.example.springrestvotingsystem.dto.request.UpdateCandidateRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,6 +34,9 @@ public class Candidate {
     @OneToMany(mappedBy = "candidate")
     private List<Vote> votes;
 
+    @OneToOne(mappedBy = "candidate")
+    private File image;
+
     @CreationTimestamp
     @Column(name = "created_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -58,5 +62,13 @@ public class Candidate {
         this.id = id;
         this.firstName = updateCandidateRequest.getFirstName();
         this.lastName = updateCandidateRequest.getLastName();
+    }
+
+    public Candidate(CandidateDTO candidateDTO){
+        this.id=candidateDTO.getId();
+        this.firstName=candidateDTO.getFirstName();
+        this.lastName=candidateDTO.getLastName();
+        this.createdAt = LocalDateTime.parse(candidateDTO.getCreatedAt());
+        this.updatedAt = LocalDateTime.parse(candidateDTO.getUpdatedAt());
     }
 }

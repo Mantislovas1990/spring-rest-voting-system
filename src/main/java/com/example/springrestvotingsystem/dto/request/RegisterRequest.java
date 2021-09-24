@@ -1,6 +1,7 @@
 package com.example.springrestvotingsystem.dto.request;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class RegisterRequest {
 
     @NotBlank

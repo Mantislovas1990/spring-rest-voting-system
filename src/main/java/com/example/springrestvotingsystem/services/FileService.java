@@ -15,9 +15,6 @@ import java.util.Set;
 @Service
 public class FileService {
 
-//    @Value("${uploads.dir}")
-//    private String dir;
-//
     @Value("${uploads.filesize.max-bytes}")
     private Long maxSize;
 
@@ -27,26 +24,6 @@ public class FileService {
         this.fileRepository = fileRepository;
     }
 
-//    public void uploadImage(MultipartFile image) {
-//        validateImage(image);
-//
-//        String filename = String.format("%s_%d.%s", image.getOriginalFilename().split("\\.")[0],
-//                System.currentTimeMillis(), image.getOriginalFilename().split("\\.")[1]);
-//
-//        try {
-//            image.transferTo(Path.of(dir + "/" + filename));
-//        } catch (IOException e) {
-//            throw new FileException("Cannot create file");
-//        }
-//    }
-//
-//    public byte[] getImage(String filename) {
-//        try {
-//            return Files.readAllBytes(Path.of(dir + "/" + filename));
-//        } catch (IOException e) {
-//            throw new FileNotFoundException(filename);
-//        }
-//    }
 
     public void uploadBlobImage(MultipartFile image) {
         validateImage(image);
@@ -83,4 +60,5 @@ public class FileService {
             throw new FileException("Image size cannot be more than " + maxSize);
         }
     }
+
 }

@@ -21,13 +21,6 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "votes",
-//            joinColumns = @JoinColumn(name = "voter_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "candidate_id", referencedColumnName = "id")
-//    )
-//    private List<Vote> votes;
-
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;

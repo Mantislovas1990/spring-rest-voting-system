@@ -3,6 +3,7 @@ package com.example.springrestvotingsystem.services;
 import com.example.springrestvotingsystem.entities.Voter;
 import com.example.springrestvotingsystem.exceptions.ResourceNotFoundException;
 import com.example.springrestvotingsystem.exceptions.VoterAlreadyExistsException;
+import com.example.springrestvotingsystem.exceptions.VoterNotFoundException;
 import com.example.springrestvotingsystem.repositories.RoleRepository;
 import com.example.springrestvotingsystem.repositories.VoterRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,6 +56,6 @@ public class VoterService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return null;
+        return voterRepository.findVoterByUsername(userName).orElseThrow(() -> new VoterNotFoundException(userName));
     }
 }

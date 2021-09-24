@@ -63,11 +63,6 @@ CREATE TABLE voter_role
     role_id  BIGINT REFERENCES roles (id)
 );
 
-INSERT INTO roles (name)
-VALUES ('VOTER'),
-       ('ADMIN');
-
-
 CREATE TABLE files
 (
     id           BIGSERIAL PRIMARY KEY NOT NULL,
@@ -75,7 +70,24 @@ CREATE TABLE files
     size         BIGINT                NOT NULL,
     bytes        BYTEA                 NOT NULL,
     candidate_id BIGINT REFERENCES candidates (id),
-    created      TIMESTAMP             NOT NULL DEFAULT NOW(),
-    updated      TIMESTAMP             NOT NULL DEFAULT NOW()
+    created_at      TIMESTAMP             NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMP             NOT NULL DEFAULT NOW()
 
 );
+
+
+INSERT INTO roles (name)
+VALUES ('VOTER'),
+       ('ADMIN');
+
+--PASS admin123
+--PASS user123
+INSERT INTO voters(username, password, first_name, last_name, email, gender, age)
+VALUES ('admin', '{bcrypt}$2a$10$rIWyUZWc2sDvt2Jv8BrPB.DgMJgOl.k26McT1vSOQYk4NN76ECb96', 'mantas', 'bieliunas',
+        'mantas@mantas.com', 'male', 22),
+       ('user', '{bcrypt}$2a$10$3I6yy2JhN2BWEvF2pV6A2etA3MnwYRtfPPjZ6i6KyAsGYxaXn1s06', 'userName', 'userLastName',
+        'user@mantas.com', 'male', 22);
+
+INSERT INTO voter_role(voter_id, role_id)
+VALUES (1,2),
+       (2,1);

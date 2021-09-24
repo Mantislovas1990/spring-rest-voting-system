@@ -19,4 +19,7 @@ public class CreateCandidateRequest {
     @NotBlank
     @ApiModelProperty(notes = "Candidate last name", required = true, name = "lastName", value = "Barnauskas", example = "Barnauskas")
     private String lastName;
+
+
+
 }

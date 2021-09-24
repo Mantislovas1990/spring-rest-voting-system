@@ -7,11 +7,13 @@ import com.example.springrestvotingsystem.dto.response.CreateCandidateResponse;
 import com.example.springrestvotingsystem.dto.response.UpdateCandidateResponse;
 import com.example.springrestvotingsystem.entities.Candidate;
 import com.example.springrestvotingsystem.services.CandidateService;
+import com.example.springrestvotingsystem.services.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,9 +30,12 @@ import static java.util.stream.Collectors.toList;
 public class CandidateController {
 
     private final CandidateService candidateService;
+    private final FileService fileService;
 
-    public CandidateController(CandidateService candidateService) {
+
+    public CandidateController(CandidateService candidateService, FileService fileService) {
         this.candidateService = candidateService;
+        this.fileService = fileService;
     }
 
     @ApiOperation(value = "Get all candidates", tags = "getCandidates", httpMethod = "GET")
@@ -40,6 +45,9 @@ public class CandidateController {
     })
     @GetMapping
     public List<CandidateDTO> getCandidates(@RequestParam(required = false) Boolean desc) {
+        if(Boolean.TRUE.equals(desc)){
+            return candidateService.showWhoIsWinningNow().stream().map(CandidateDTO::new).collect(toList());
+        }
         return candidateService.getCandidates().stream().map(CandidateDTO::new).collect(toList());
     }
 
@@ -85,12 +93,11 @@ public class CandidateController {
             @ApiResponse(code = 400, message = "Validation failed"),
             @ApiResponse(code = 401, message = "Unauthorized")
     })
-    @PostMapping("/create")
+    @PostMapping(path = "/create")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreateCandidateResponse createCandidate(@Valid @RequestBody CreateCandidateRequest createCandidateRequest,
-                                                   @RequestParam("img") MultipartFile file) {
-        return new CreateCandidateResponse(candidateService.createCandidate(new Candidate(createCandidateRequest),file));
+    public CreateCandidateResponse createCandidate(@Valid @RequestBody CreateCandidateRequest createCandidateRequest) {
+        return new CreateCandidateResponse(candidateService.createCandidate(new Candidate(createCandidateRequest)));
     }
 
     @ApiOperation(value = "Get winner candidate", tags = "getWinnerOfElection", httpMethod = "GET")
@@ -103,5 +110,28 @@ public class CandidateController {
         return candidateService.findWhoWonElection();
     }
 
+    @PostMapping("/{id}/image")
+    @PreAuthorize("hasRole('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "store candidate image to database", tags = "uploadCandidateImage", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully stored candidate image"),
+            @ApiResponse(code = 400, message = "Validation failed"),
+            @ApiResponse(code = 401, message = "Unauthorized")
+    })
+    public void uploadCandidateImage(@RequestParam("image") MultipartFile image, @PathVariable Long id) {
+        fileService.uploadBlobImage(image);
+    }
+
+
+    @ApiOperation(value = "Get candidate image from database", tags = "getCandidateImage", httpMethod = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully get candidate image"),
+            @ApiResponse(code = 401, message = "Unauthorized")
+    })
+    @GetMapping(value = "/{id}/image", produces = {MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
+    public byte[] getCandidateImage(@PathVariable("id") Long id) {
+        return candidateService.getCandidate(id).getImage().getBytes();
+    }
 
 }

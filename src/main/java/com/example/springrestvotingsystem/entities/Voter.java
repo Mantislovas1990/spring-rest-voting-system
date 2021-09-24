@@ -59,7 +59,7 @@ public class Voter implements UserDetails {
     )
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "voter")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "voter")
     private List<Vote> votes;
 
     @CreationTimestamp

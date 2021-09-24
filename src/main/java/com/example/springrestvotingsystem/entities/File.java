@@ -30,6 +30,10 @@ public class File {
     @Column(name = "bytes")
     private byte[] bytes;
 
+    @OneToOne
+    @JoinColumn(name = "candidate_id")
+    private Candidate candidate;
+
     @CreationTimestamp
     @Column(name = "created_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

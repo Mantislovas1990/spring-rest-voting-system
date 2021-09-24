@@ -17,6 +17,7 @@ public class CreateCandidateResponse {
 
     private String lastName;
 
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
